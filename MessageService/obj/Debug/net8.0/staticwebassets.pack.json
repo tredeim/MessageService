@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/history.html",
+      "PackagePath": "staticwebassets/history.html"
+    },
+    {
+      "Id": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/send.html",
+      "PackagePath": "staticwebassets/send.html"
+    },
+    {
+      "Id": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/ws.html",
+      "PackagePath": "staticwebassets/ws.html"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.MessageService.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.MessageService.props",
+      "PackagePath": "build\\MessageService.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.MessageService.props",
+      "PackagePath": "buildMultiTargeting\\MessageService.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.MessageService.props",
+      "PackagePath": "buildTransitive\\MessageService.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Real-time messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #messages {
+            list-style-type: none;
+            padding: 0;
+        }
+        #messages li {
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<h1>Real-time messages</h1>
+<ul id="messages"></ul>
+
+<script>
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const wsUrl = protocol + "://" + window.location.host + "/ws/messages";
+
+    const ws = new WebSocket(wsUrl);
+
+    ws.onopen = function() {
+        console.log("WebSocket connection established.");
+    };
+
+    ws.onmessage = function(event) {
+        try {
+            const message = JSON.parse(event.data);
+            const li = document.createElement("li");
+            const date = new Date(message.CreatedAt);
+            li.textContent = `[${date.toLocaleString()}] Seq: ${message.SequenceNumber} - ${message.Text}`;
+            document.getElementById("messages").appendChild(li);
+        } catch (error) {
+            console.error("Error during message processing:", error);
+        }
+    };
+
+    ws.onerror = function(error) {
+        console.error("WebSocket error:", error);
+    };
+
+    ws.onclose = function() {
+        console.log("WebSocket connection closed.");
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sending message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        #response {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<h1>Sending message</h1>
+<form id="sendForm">
+    <label for="text">Message text (max. 128 characters):</label>
+    <input type="text" id="text" name="text" maxlength="128" required>
+
+    <label for="seq">Sequence number:</label>
+    <input type="number" id="seq" name="seq" required>
+
+    <button type="submit">Send message</button>
+</form>
+
+<div id="response"></div>
+
+<script>
+    document.getElementById("sendForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const text = document.getElementById("text").value.trim();
+        const seq = parseInt(document.getElementById("seq").value, 10);
+
+        if (!text) {
+            alert("Enter message text.");
+            return;
+        }
+
+        const data = {
+            text: text,
+            sequenceNumber: seq
+        };
+
+        try {
+            const response = await fetch("/api/message/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                document.getElementById("response").innerText = "Error: " + errorText;
+            } else {
+                const result = await response.json();
+                document.getElementById("response").innerText = "Message sent successfully! ID: " + result.id;
+                document.getElementById("sendForm").reset();
+            }
+        } catch (error) {
+            document.getElementById("response").innerText = "Error while sending request: " + error;
+        }
+    });
+</script>
+</body>
+</html>

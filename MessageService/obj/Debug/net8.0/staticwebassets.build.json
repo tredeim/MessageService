@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "+Myo7OIZQqEq2gJh82UcEN55RRy+lLpS4ftZhjxzVXg=",
+  "Source": "MessageService",
+  "BasePath": "_content/MessageService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MessageService/wwwroot",
+      "Source": "MessageService",
+      "ContentRoot": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/",
+      "BasePath": "_content/MessageService",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/history.html",
+      "SourceId": "MessageService",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/",
+      "BasePath": "_content/MessageService",
+      "RelativePath": "history.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/history.html"
+    },
+    {
+      "Identity": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/send.html",
+      "SourceId": "MessageService",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/",
+      "BasePath": "_content/MessageService",
+      "RelativePath": "send.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/send.html"
+    },
+    {
+      "Identity": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/ws.html",
+      "SourceId": "MessageService",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService/wwwroot/",
+      "BasePath": "_content/MessageService",
+      "RelativePath": "ws.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/ws.html"
+    }
+  ]
+}

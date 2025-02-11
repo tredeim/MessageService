@@ -1,0 +1,19 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  web:
+    build:
+      context: "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService"
+      dockerfile: "Dockerfile"
+      target: "build"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/MessageService.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/MessageService.staticwebassets.runtime.CT.json"
+    image: "messageservice:dev"
+    ports: []
+    volumes:
+    - "/Users/rubenmarikyan/RiderProjects/MessageService/MessageService:/app:rw"
+    working_dir: "/app"

@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: messagesdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: q1w2e3
+    ports:
+      - "15432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: ./MessageService
+      dockerfile: Dockerfile 
+    ports:
+      - "8000:8080"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=messagesdb;Username=postgres;Password=q1w2e3"
+
+volumes:
+  pgdata:

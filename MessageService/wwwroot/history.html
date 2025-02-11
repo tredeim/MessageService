@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Message history</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        input {
+            margin-right: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Message history</h1>
+
+<form id="historyForm">
+    <label for="from">From:</label>
+    <input type="datetime-local" id="from" name="from" required>
+
+    <label for="to">To:</label>
+    <input type="datetime-local" id="to" name="to" required>
+
+    <button type="submit">Get the history</button>
+</form>
+
+<div id="results">
+    <table id="resultsTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Time</th>
+            <th>Sequence number</th>
+            <th>Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function toDatetimeLocal(date) {
+        const pad = num => String(num).padStart(2, '0');
+        const year = date.getFullYear();
+        const month = pad(date.getMonth() + 1);
+        const day = pad(date.getDate());
+        const hours = pad(date.getHours());
+        const minutes = pad(date.getMinutes());
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    const now = new Date();
+    const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000);
+    document.getElementById("from").value = toDatetimeLocal(tenMinutesAgo);
+    document.getElementById("to").value = toDatetimeLocal(now);
+
+    document.getElementById("historyForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const fromValue = document.getElementById("from").value;
+        const toValue = document.getElementById("to").value;
+
+        if (!fromValue || !toValue) {
+            alert("Fill in both fields.");
+            return;
+        }
+
+        const fromIso = new Date(fromValue).toISOString();
+        const toIso = new Date(toValue).toISOString();
+
+        try {
+            const response = await fetch(`/api/message/history?from=${encodeURIComponent(fromIso)}&to=${encodeURIComponent(toIso)}`);
+            if (!response.ok) {
+                const errorText = await response.text();
+                alert("Error: " + errorText);
+                return;
+            }
+
+            const messages = await response.json();
+            const tbody = document.getElementById("resultsTable").getElementsByTagName("tbody")[0];
+            tbody.innerHTML = "";
+
+            if (messages.length === 0) {
+                const row = tbody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 4;
+                cell.innerText = "No messages for the selected period.";
+            } else {
+                messages.forEach(msg => {
+                    const row = tbody.insertRow();
+                    row.insertCell().innerText = msg.id;
+                    const date = new Date(msg.createdAt);
+                    row.insertCell().innerText = date.toLocaleString();
+                    row.insertCell().innerText = msg.sequenceNumber;
+                    row.insertCell().innerText = msg.text;
+                });
+            }
+        } catch (error) {
+            alert("Error while retrieving history: " + error);
+        }
+    });
+</script>
+</body>
+</html>
