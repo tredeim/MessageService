@@ -11,7 +11,7 @@ This project is containerized with Docker and orchestrated via Docker Compose fo
 ## Features
 
 - **REST API Endpoints:**
-  - `POST /api/message/send` — Accepts a message, assigns a server-side creation timestamp (and optionally an auto-generated sequence number), saves it to the database, and broadcasts it to connected WebSocket clients.
+  - `POST /api/message/send` — Accepts a message, assigns a server-side creation timestamp, saves it to the database, and broadcasts it to connected WebSocket clients.
   - `GET /api/message/history` — Retrieves messages within a specified date range.
 - **WebSockets:**
   - Real-time broadcasting of new messages to connected clients.
@@ -43,7 +43,7 @@ The system consists of three main components:
 
 ## Technology Stack
 
-- **Backend:** ASP.NET Core (.NET 6)
+- **Backend:** ASP.NET Core (.NET 8)
 - **Database:** PostgreSQL
 - **Database Migrations:** FluentMigrator
 - **Real-Time Communication:** WebSockets
