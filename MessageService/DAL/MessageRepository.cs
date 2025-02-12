@@ -27,7 +27,12 @@ public class MessageRepository : IMessageRepository
         command.Parameters.AddWithValue("created_at", message.CreatedAt);
         command.Parameters.AddWithValue("seq", message.SequenceNumber);
 
-        message.Id = await command.ExecuteNonQueryAsync(token);
+        var result = await command.ExecuteScalarAsync(token);
+        
+        if (result != null && result != DBNull.Value)
+        {
+            message.Id = Convert.ToInt32(result);
+        }
     }
 
     public async Task<IEnumerable<Message>> GetMessagesAsync(DateTime from, DateTime to, CancellationToken token)
@@ -56,11 +61,6 @@ public class MessageRepository : IMessageRepository
             });
         }
 
-        var result = await command.ExecuteScalarAsync(token);
-        
-        if (result != null && result != DBNull.Value)
-        {
-            message.Id = Convert.ToInt32(result);
-        }
+        return messages;
     }
 }
