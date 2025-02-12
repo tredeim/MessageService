@@ -56,6 +56,11 @@ public class MessageRepository : IMessageRepository
             });
         }
 
-        return messages;
+        var result = await command.ExecuteScalarAsync(token);
+        
+        if (result != null && result != DBNull.Value)
+        {
+            message.Id = Convert.ToInt32(result);
+        }
     }
 }
